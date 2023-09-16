@@ -1,6 +1,7 @@
 """
 auteur : Enis Béziau 1H
 Date : 15/09/23
+Le programme propose à l'utilisateur d'entrer un nombre.
 """
 import random
 
@@ -24,11 +25,19 @@ def saisir_proposition():
         saisir_proposition()
 
 
-def verifier_victoire(proposition: int, nbr_a_trouver: int):
+
+def verifier_victoire(proposition: int, nbr_a_trouver: int) -> bool:
+    """
+    Retourne True si la proposition est égal au nbr_a_trouver, False sinon
+    """
     return proposition == nbr_a_trouver
 
 
 def message_victoire(nbr_essai: int) -> str:
+    """
+    Renvoie un message personnalisé en fonction du nbr de tentatives dont 
+    l'utilisateur a eu besoin pour trouver le mot
+    """
     if nbr_essai == 1:
         print("Tu n'as pris qu'un essai, félicitation")
     elif nbr_essai < 10:
@@ -38,6 +47,9 @@ def message_victoire(nbr_essai: int) -> str:
 
 
 def jeu():
+    """
+    Code principal du jeu qui gère la boucle principale et la définition des variables
+    """
     essai = 0
     nbr_aleatoire = generer_nombre_au_hasard(1, 1000)
     print(nbr_aleatoire)
@@ -50,3 +62,6 @@ def jeu():
 
 jeu = jeu()
 message_victoire(jeu)
+rejouer = input("Voulez-vous rejouer ? (o/n)\n==> ")
+if rejouer == "o":
+    jeu()
