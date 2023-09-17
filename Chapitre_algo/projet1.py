@@ -1,7 +1,9 @@
 """
 auteur : Enis Béziau 1H
 Date : 15/09/23
-Le programme propose à l'utilisateur d'entrer un nombre.
+Le programme génère un nombre aléatoire compris dans un intervalle à déterminer
+Il demande ensuite à l'utilisateur d'entrer un nombre et vérifie si l'entrée est valide et égale au nombre généré aléatoirement
+S'il l'est, le programme s'arrête et affiche un message en fonction du nombre d'essai_necessaires nécessai_necessairere. Incrémente le compteur d'essai_necessaire sinon
 """
 import random
 
@@ -33,31 +35,31 @@ def verifier_victoire(proposition: int, nbr_a_trouver: int) -> bool:
     return proposition == nbr_a_trouver
 
 
-def message_victoire(nbr_essai: int) -> str:
+def message_victoire(nbr_essai_necessaire: int) -> str:
     """
     Renvoie un message personnalisé en fonction du nbr de tentatives dont 
     l'utilisateur a eu besoin pour trouver le mot
     """
-    if nbr_essai == 1:
-        print("Tu n'as pris qu'un essai, félicitation")
-    elif nbr_essai < 10:
-        print(f"{nbr_essai} essais, c'est pas si mal en soit")
+    if nbr_essai_necessaire == 1:
+        print(f"Félicitations !\nVous n'avez eu besoin que d'un seul essai")
+    elif nbr_essai_necessaire <= 10:
+        print(f"Pas mal !\nVous avez eu besoin de {nbr_essai_necessaire} essais")
     else:
-        print(f"{nbr_essai} essai c'est pas mal j'av")
+        print(f"Vous ferez mieux la prochaine fois\n{nbr_essai_necessaire} ont été nécessaire")
 
 
 def jeu():
     """
     Code principal du jeu qui gère la boucle principale et la définition des variables
     """
-    essai = 0
+    essai_necessaire = 0
     nbr_aleatoire = generer_nombre_au_hasard(1, 1000)
     print(nbr_aleatoire)
     proposition_joueur = saisir_proposition()
     while not verifier_victoire(proposition_joueur, nbr_aleatoire):
         proposition_joueur = saisir_proposition()
-        essai += 1
-    return essai + 1
+        essai_necessaire += 1
+    return essai_necessaire + 1
 
 
 jeu = jeu()
