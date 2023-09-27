@@ -1,69 +1,83 @@
+# -*- coding: utf-8 -*-
 """
-auteur : Enis Béziau 1H
-Date : 15/09/23
-Le programme génère un nombre aléatoire compris dans un intervalle à déterminer
-Il demande ensuite à l'utilisateur d'entrer un nombre et vérifie si l'entrée est valide et égale au nombre généré aléatoirement
-S'il l'est, le programme s'arrête et affiche un message en fonction du nombre d'essai_necessaires nécessai_necessairere. Incrémente le compteur d'essai_necessaire sinon
+Auteur : Enis Béziau ; Gabriel Claude-Bouilly
+Date :
+Le programme génère aléatoirement un nombre entre 1 et 1000 grace à la méthode randint() du module random
+Le but du programme est de faire deviner ce nombre à l'utilisateur. Pour ce faire, il pourra entrer un nombre
+Si ce nombre est entre 1 et 1000
+    Si le nombre entré est égal au nombre généré aléatoirement, on affiche un message de félicitation et le nbr d'essai
+    Sinon on indique que le nombre n'est pas égal et on incrémente un compteur d'essai
+Sinon on refait entrer un nombre à l'utilisateur sans compter un essai
 """
 import random
 
 
-def generer_nombre_au_hasard(borne_inferieure: int, borne_superieure: int) -> int:
+def generer_nombre_au_hasard(borne_1, borne_2):
     """
-    Prend en entrée deux entiers : les bornes inférieures et supérieures de l'intervalle dans lequel
-    la méhtode randint du module random va choisir un nombre au hasard. L'intervalle est [borne_inferieure ; borne_superieure]
+    :param int borne_1: La borne inférieure de l'intervalle dans lequel le nombre sera généré. La borne est inclue
+    :param int borne_2: La borne supérieure de l'intervalle dans lequel le nombre sera généré. La borne est inclue
+    :return: Un nombre aléatoire dans l'intervalle [borne_1 ; borne_2]
+    :rtype: int
     """
-    return random.randint(borne_inferieure, borne_superieure)
+    return random.randint(borne_1, borne_2)
 
 
-def saisir_proposition():
+def saisir_et_verif_proposition():
     """
-    Cette fonction propose à l'utilisateur de rentrer sa proposition et vérifie que c'est bien un entier
+    Cette fonction sert à récolter l'entrée de l'utilisateur et à vérifier si le nombre est bien compris entre 1 et 1000
+    :return: la proposition entrée par l'utilisateur
+    :rtype: int
     """
-    entree = input("Veuillez-entrer un nombre \n==> ")
-    if entree.strip().isdigit():
-        return int(entree)
+    proposition = int(input("Veuillez-entrer un nombre compris entre 1 et 1000\n==> "))
+
+    if 1 <= proposition <= 1000:
+        return proposition
     else:
-        saisir_proposition()
+        saisir_et_verif_proposition()
 
 
-
-def verifier_victoire(proposition: int, nbr_a_trouver: int) -> bool:
+def verif_victoire(proposition, nombre_gagnant):
     """
-    Retourne True si la proposition est égal au nbr_a_trouver, False sinon
+    Cette fonction vérifie si le nombre entré est bien le nombre généré aléatoirement
+    :param int proposition: La proposition de nombre de l'utilisateur
+    :param int nombre_gagnant: Le nombre généré aléatoirement
+    :return: True si le nombre entré est gagnant, False sinon
+    :rtype: bool
     """
-    return proposition == nbr_a_trouver
+    return proposition == nombre_gagnant
 
 
-def message_victoire(nbr_essai_necessaire: int) -> str:
+def message_victoire(nbr_essai_pour_gagner):
     """
-    Renvoie un message personnalisé en fonction du nbr de tentatives dont 
-    l'utilisateur a eu besoin pour trouver le mot
+    Cette fonction sert à renvoyer un message différent à l'utilisateur en fonction de son nbr de point
+    :param int nbr_essai_pour_gagner: Le nombre d'essai dont l'utilsateur a eu besoin pour trouver le nbr aléatoire
+    :return: Un message de félicitations
+    :rtype: str
     """
-    if nbr_essai_necessaire == 1:
-        print(f"Félicitations !\nVous n'avez eu besoin que d'un seul essai")
-    elif nbr_essai_necessaire <= 10:
-        print(f"Pas mal !\nVous avez eu besoin de {nbr_essai_necessaire} essais")
+    if nbr_essai_pour_gagner == 1:
+        return "Félicitation, vous avez trouvé du premier coup"
+    elif nbr_essai_pour_gagner < 10:
+        return "Bravo, ça ne vous a pris que {} essais"
     else:
-        print(f"Vous ferez mieux la prochaine fois\n{nbr_essai_necessaire} ont été nécessaire")
+        return "Ne te décourage pas ! Tu n'as pris que {} essais"
 
 
 def jeu():
-    """
-    Code principal du jeu qui gère la boucle principale et la définition des variables
-    """
-    essai_necessaire = 0
-    nbr_aleatoire = generer_nombre_au_hasard(1, 1000)
-    print(nbr_aleatoire)
-    proposition_joueur = saisir_proposition()
-    while not verifier_victoire(proposition_joueur, nbr_aleatoire):
-        proposition_joueur = saisir_proposition()
+    essai_necessaire = 1
+    nombre_hasard = generer_nombre_au_hasard(1, 1000)
+    print(nombre_hasard)
+    proposition_joueur = saisir_et_verif_proposition()
+    while not verif_victoire(nombre_hasard, proposition_joueur):
+        proposition_joueur = saisir_et_verif_proposition()
         essai_necessaire += 1
-    return essai_necessaire + 1
+    return essai_necessaire
 
 
-jeu = jeu()
-message_victoire(jeu)
-rejouer = input("Voulez-vous rejouer ? (o/n)\n==> ")
-if rejouer == "o":
+init_jeu = jeu()
+print(message_victoire(init_jeu).format(init_jeu))
+
+rejouer = input("Voulez-vous rejouer (o/n)\n==> ")
+if rejouer == 'o':
     jeu()
+else:
+    print("Fin du programme...")
