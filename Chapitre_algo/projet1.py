@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Auteur : Enis Béziau ; Gabriel Claude-Bouilly
-Date :
+Date : 5 octobre 2023
 Le programme génère aléatoirement un nombre entre 1 et 1000 grace à la méthode randint() du module random
 Le but du programme est de faire deviner ce nombre à l'utilisateur. Pour ce faire, il pourra entrer un nombre
 Si ce nombre est entre 1 et 1000
@@ -10,6 +10,11 @@ Si ce nombre est entre 1 et 1000
 Sinon on refait entrer un nombre à l'utilisateur sans compter un essai
 """
 import random
+import os
+
+
+BORNE_MIN = 0
+BORNE_MAX = 1000
 
 
 def generer_nombre_au_hasard(borne_1, borne_2):
@@ -22,18 +27,19 @@ def generer_nombre_au_hasard(borne_1, borne_2):
     return random.randint(borne_1, borne_2)
 
 
-def saisir_et_verif_proposition():
+def saisir_et_verif_proposition(borne_min_a_verif, borne_max_a_verif):
     """
     Cette fonction sert à récolter l'entrée de l'utilisateur et à vérifier si le nombre est bien compris entre 1 et 1000
+    :param int borne_min_a_verif: La borne minimale de l'intervalle dans lequel doit être compris le nombre a verif
+    :param int borne_max_a_verif: La borne maximale de l'intervalle dans lequel doit être compris le nombre a verif
     :return: la proposition entrée par l'utilisateur
     :rtype: int
     """
-    proposition = int(input("Veuillez-entrer un nombre compris entre 1 et 1000\n==> "))
-
-    if 1 <= proposition <= 1000:
-        return proposition
-    else:
-        saisir_et_verif_proposition()
+    ok = False  # Variable drapeau
+    while not ok:
+        proposition = int(input(f"Veuillez-entrer un nombre entre {borne_min_a_verif} et {borne_max_a_verif}\n==> "))
+        ok = borne_min_a_verif <= proposition <= borne_max_a_verif
+    return proposition
 
 
 def verif_victoire(proposition, nombre_gagnant):
@@ -63,12 +69,19 @@ def message_victoire(nbr_essai_pour_gagner):
 
 
 def jeu():
+    """
+    Fonction initialisant le jeu en créant une variable essai_necessaire de type int qui fait office de compteur
+    Génère le nombre au hasard
+    S'occupe de la boucle du jeu
+    :return: Le nombre d'essai nécessaire à l'utilisateur pour trouver nombre_hasard
+    :rtype: int
+    """
     essai_necessaire = 1
-    nombre_hasard = generer_nombre_au_hasard(1, 1000)
+    nombre_hasard = generer_nombre_au_hasard(BORNE_MIN, BORNE_MAX)
     print(nombre_hasard)
-    proposition_joueur = saisir_et_verif_proposition()
+    proposition_joueur = saisir_et_verif_proposition(BORNE_MIN, BORNE_MAX)
     while not verif_victoire(nombre_hasard, proposition_joueur):
-        proposition_joueur = saisir_et_verif_proposition()
+        proposition_joueur = saisir_et_verif_proposition(BORNE_MIN, BORNE_MAX)
         essai_necessaire += 1
     return essai_necessaire
 
@@ -78,6 +91,7 @@ print(message_victoire(init_jeu).format(init_jeu))
 
 rejouer = input("Voulez-vous rejouer (o/n)\n==> ")
 if rejouer == 'o':
+    os.system('clear')
     jeu()
 else:
     print("Fin du programme...")
