@@ -16,17 +16,16 @@ def maximum(a, b, c):
         return c
 
 
-print(maximum(12, 6, 4))
-print(maximum(6, 12, 4))
-print(maximum(6, 4, 12))
-print(maximum(6, 12, 12))
-print(maximum(12, 6, 12))
-print(maximum(12, 12, 6))
-print(maximum(12, 12, 12))
-print(maximum(18, 12, 12))
-print(maximum(12, 18, 12))
-print(maximum(12, 12, 18))
-
+assert maximum(12, 6, 4) == 12
+assert maximum(6, 12, 4) == 12
+assert maximum(6, 4, 12) == 12
+assert maximum(6, 12, 12) == 12
+assert maximum(12, 6, 12) == 12
+assert maximum(12, 12, 6) == 12
+assert maximum(12, 12, 12) == 12
+assert maximum(18, 12, 12) == 18
+assert maximum(12, 18, 12) == 18
+assert maximum(12, 12, 18) == 18
 
 
 def technique_russe(a, b):
@@ -47,3 +46,7 @@ def technique_russe(a, b):
             a = (a - 1) / 2
             b *= 2
     return res
+
+
+assert technique_russe(10, 30) == 300
+assert technique_russe(30, 4) == 120
