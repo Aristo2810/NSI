@@ -40,11 +40,10 @@ def technique_russe(a, b):
     while a != 0:
         if a % 2 == 0:
             a /= 2
-            b *= 2
         else:
             res += b
             a = (a - 1) / 2
-            b *= 2
+        b *= 2
     return res
 
 
