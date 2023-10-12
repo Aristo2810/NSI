@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Auteur : Enis Béziau 1H
-Date : 12 octobre 2023
-"""
 def pgcd(a: int, b: int) -> int:
     """Cette fonction renvoie PGCD(a ; b) grace à l'algorithme d'Euclide"""
     while b:
@@ -18,10 +13,10 @@ def ajouter_fraction(fraction1: tuple[int, int], fraction2: tuple[int, int]) -> 
     denominateur_commun = fraction1[1] * fraction2[1] // pgcd(fraction1[1], fraction2[1])
 
     #  Ajustement en * le numérateur par le coefficient de * entre le denominateur commun et le dénominateur de base
-    ajutement_fraction_1 = fraction1[0] * (denominateur_commun // fraction1[1])
-    ajutement_fraction_2 = fraction2[0] * (denominateur_commun // fraction2[1])
+    numerateur_1 = fraction1[0] * (denominateur_commun // fraction1[1])
+    numerateur_2 = fraction2[0] * (denominateur_commun // fraction2[1])
 
-    numerateur_final = ajutement_fraction_1 + ajutement_fraction_2
+    numerateur_final = numerateur_1 + numerateur_2
 
     # Calcul le PGCD pour en déduire par quoi diviser pour simplifier
     diviseur_commun = pgcd(numerateur_final, denominateur_commun)
@@ -32,3 +27,5 @@ def ajouter_fraction(fraction1: tuple[int, int], fraction2: tuple[int, int]) -> 
 assert ajouter_fraction((0, 10), (8, 5)) == (8, 5)
 assert ajouter_fraction((9, 34), (23, 4)) == (409, 68)
 assert ajouter_fraction((8, 19), (5, 1)) == (103, 19)
+assert ajouter_fraction((1, -2), (1, 3)) == (-1, 6)
+assert ajouter_fraction((5, 5), (3, 3)) == (2, 1)
