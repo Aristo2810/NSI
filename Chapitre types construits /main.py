@@ -89,3 +89,22 @@ assert semaine[jour_semaine((21, 10, 7))] == "Dimanche"
 assert semaine[jour_semaine((28, 10, 24))] == "Lundi"
 
 
+def bintodec(nombre):
+    """
+    Renvoie l'écriture base 10 du nombre passé en argument
+    :param str nombre: chaine de caractère composé uniquement de 0 ou de 1
+    :return: L'écriture base 10
+    :rtype: int
+    """
+    total = 0
+    for index in range(len(nombre)):
+        chiffre = nombre[-1 - index]
+        total += int(chiffre) * 2**index
+    return total
+
+
+assert bintodec("010110") == 22
+assert bintodec("01001101") == 77
+assert bintodec("00000000") == 0
+
+
