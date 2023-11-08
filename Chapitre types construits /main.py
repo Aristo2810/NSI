@@ -68,3 +68,24 @@ def initiale2(chaine):
 
 
 assert initiale2('Dupont Jean-Paul') == "D.J"
+
+
+def jour_semaine(date: tuple[int, int, int]):
+    """Renvoie l'index correspondant au jour de la semaine : 0 --> dimanche ..."""
+    jour, mois, annee = date[0], date[1], date[2]
+    annee_corrigee = (annee - 1) if mois < 3 else annee
+    k = ((23 * mois) // 9) + jour + 4 + annee + annee_corrigee // 4 - annee_corrigee // 100 + annee_corrigee // 400
+
+    if mois < 3:
+        return k % 7
+    else:
+        return (k - 2) % 7
+
+
+semaine = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"]
+
+assert semaine[jour_semaine((8, 11, 23))] == "Mercredi"
+assert semaine[jour_semaine((21, 10, 7))] == "Dimanche"
+assert semaine[jour_semaine((28, 10, 24))] == "Lundi"
+
+
