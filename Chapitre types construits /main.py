@@ -171,3 +171,41 @@ def euro_million():
     return tab
 
 
+# Exercice 25
+def mini(tab):
+    """
+    :param list[int] tab: La liste à analyser
+    :return: Le plus petit élement du tableau passé en paramètre
+    :rtype: int
+    """
+    assert tab
+    minimum = tab[0]
+    for element in tab:
+        if element < minimum:
+            minimum = element
+    return minimum
+
+
+assert mini([-8, 9, 7, 4, 5]) == -8
+assert mini([100, 7, 21, 14, 29]) == 7
+
+
+def mini_bis(tab):
+    """
+    :param list[int] tab: Le tableau à analyser
+    :return: le plus petit élement du tableau et son indice
+    :rtype: tuple[int, int]
+    """
+    assert tab
+    minimum = tab[0]
+    minimum_index = 0
+    for index, element in enumerate(tab):
+        if element < minimum:
+            minimum = element
+            minimum_index = index
+    return minimum_index, minimum
+
+
+assert mini_bis([-8, 9, 7, 4, 5]) == (0, -8)
+assert mini_bis([100, 7, 21, 14, 29]) == (1, 7)
+
