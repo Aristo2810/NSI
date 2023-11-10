@@ -1,6 +1,7 @@
 """
 Auteur : Enis Béziau
 Correction des exercices sur les listes et les tuples
+Pour trouver un exo particulier, utiliser l'outil de recherche car exos dans le désordre
 """
 import random
 
@@ -209,3 +210,131 @@ def mini_bis(tab):
 assert mini_bis([-8, 9, 7, 4, 5]) == (0, -8)
 assert mini_bis([100, 7, 21, 14, 29]) == (1, 7)
 
+
+# Exo cours 1
+def ajoute_double(tab):
+    taille_initiale = len(tab)
+    nouveau_tableau = [0 for _ in range(taille_initiale * 2)]
+
+    for i in range(taille_initiale):
+        nouveau_tableau[i] = tab[i]
+        nouveau_tableau[i + taille_initiale] = tab[i] * 2
+
+    return nouveau_tableau
+
+
+assert ajoute_double([1, 2, 3]) == [1, 2, 3, 2, 4, 6]
+assert ajoute_double([8, 3, 0]) == [8, 3, 0, 16, 6, 0]
+assert ajoute_double([0]) == [0, 0]
+
+
+# Exo cours 2
+def appartient(valeur, tab):
+    assert tab
+    """
+    :param int valeur: La valeur dont nous devons déterminer la présence dans le tableau
+    :param tuple[int] tab: Le tableau à parcourir
+    :return: un booléen indiquant si element fait partie ou non du tableau
+    :rtype: bool
+    """
+    for element in tab:
+        if element == valeur:
+            return True
+    return False
+
+
+tableau = [9, 18, 3, 7, 2]
+assert appartient(3, tableau)
+assert not appartient(5, tableau)
+assert appartient(2, tableau)
+
+
+# Exercice 30
+def addition_tableau(tab1, tab2):
+    """
+    :param list[int] tab1: Le premier tableau
+    :param list[int] tab2: Le second tableau
+    :return: additionne les éléments de deux tableaux de même longueur
+    :rtype: list[int]
+    """
+    assert len(tab1) == len(tab2)
+
+    long = len(tab1)
+    tableau_additionne = [0 for _ in range(long)]
+
+    for index in range(long):
+        tableau_additionne[index] = tab1[index] + tab2[index]
+    return tableau_additionne
+
+
+assert addition_tableau([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]) == [2, 4, 6, 8, 10]
+assert addition_tableau([90, 132], [-1, -2]) == [89, 130]
+assert addition_tableau([0], [0]) == [0]
+
+
+# Exercice 28
+def nbr_zero_consecutif(tab):
+    """
+    :param list[int] tab: Le tableau à parcourir
+    :return: Le plus grand nombre de 0 consécutif dans tab
+    :rtype: int
+    """
+    compteur_zero_courant = 0
+    max_zero_consecutif = 0
+
+    for element in tab:
+        if element == 0:
+            compteur_zero_courant += 1
+            if compteur_zero_courant > max_zero_consecutif:
+                max_zero_consecutif = compteur_zero_courant
+        else:
+            compteur_zero_courant = 0
+    return max_zero_consecutif
+
+
+assert nbr_zero_consecutif([0, 1, 1, 2, 0, 0, 0, 5, 0, 0]) == 3
+assert nbr_zero_consecutif([1, 2, 5]) == 0
+assert nbr_zero_consecutif([0, 0, 0, 0, 1, 0, 0, 1, 0, 0]) == 4
+
+
+# Exercice 27
+def prefixe(tab1, tab2):
+    """
+    :param list[int] tab1: Le premier tableau
+    :param list[int] tab2: Le deuxième tableau
+    :return: True si le tableau tab2 commence par les éléments du tableau tab1 dans l’ordre et False sinon
+    """
+    assert len(tab2) >= len(tab1)
+    assert tab1
+
+    for index in range(len(tab1)):
+        if not tab1[index] == tab2[index]:
+            return False
+    return True
+
+
+assert prefixe([1, 2, 3], [1, 2, 3, 4, 5, 6])
+assert not prefixe([2, 8, 9], [2, 8, 1, 9, 3])
+assert prefixe([-1], [-1, 9, 10])
+
+
+# Exercice 31
+def echange(tab, i, j):
+    """
+    :param list[int] tab: Le tableau à parcourir
+    :param int i: Le premier index
+    :param int j: Le second index
+    :return: le tableau tab en échangeant les valeurs tab[i] et tab[j]
+    :rtype: tab[int]
+    """
+    assert tab
+    assert i <= len(tab) - 1
+    assert j <= len(tab) - 1
+
+    tab[i], tab[j] = tab[j], tab[i]
+    return tab
+
+
+assert echange([1, 2, 3, 4], 0, 3) == [4, 2, 3, 1]
+assert echange([-1, 9, 2, 10, 9, 2], -3, 2) == [-1, 9, 10, 2, 9, 2]
+assert echange([0, 1], 0, 1) == [1, 0]
