@@ -1,3 +1,10 @@
+"""
+Auteur : Enis Béziau
+Correction des exercices sur les listes et les tuples
+"""
+import random
+
+
 def convert1(duree):
     """
     Renvoie le nombre de seconde dans la durée donnée en argument
@@ -70,6 +77,7 @@ def initiale2(chaine):
 assert initiale2('Dupont Jean-Paul') == "D.J"
 
 
+# Exercice 4
 def jour_semaine(date: tuple[int, int, int]):
     """Renvoie l'index correspondant au jour de la semaine : 0 --> dimanche ..."""
     jour, mois, annee = date[0], date[1], date[2]
@@ -89,6 +97,7 @@ assert semaine[jour_semaine((21, 10, 7))] == "Dimanche"
 assert semaine[jour_semaine((28, 10, 24))] == "Lundi"
 
 
+# Exercice 13
 def bintodec(nombre):
     """
     Renvoie l'écriture base 10 du nombre passé en argument
@@ -106,5 +115,59 @@ def bintodec(nombre):
 assert bintodec("010110") == 22
 assert bintodec("01001101") == 77
 assert bintodec("00000000") == 0
+
+
+# Exercice 15
+"""
+1. typeError
+2. ([7, 3], 5)
+3. [3, 3]
+4. TypeError
+"""
+
+
+# Exercice 21
+def fibonnaci(nombre):
+    """
+    :param int nombre: nombre jusqu'auquel on génère la suite
+    :return: La suite des n premiers termes de la suite de fibonnaci
+    :rtype: list[int]
+    """
+    assert nombre >= 0, "Le nombre doit etre positif"
+
+    if nombre == 0:
+        return []
+    elif nombre == 1:
+        return [1]
+    else:
+        liste = [1] * nombre
+        liste[0], liste[1] = 1, 1
+
+        for index in range(2, len(liste)):
+            liste[index] = liste[index - 1] + liste[index - 2]
+
+        return liste
+
+
+assert fibonnaci(0) == []
+assert fibonnaci(1) == [1]
+assert fibonnaci(10) == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+
+
+# Exercice 22
+def euro_million():
+    """
+    :return: La liste des numéros de l'euroMillion généré aléatoiremment
+    :rtype: list[int]
+    """
+    tab = [0] * 5
+
+    for index in range(3):
+        tab[index] = random.randint(1, 50)
+
+    for index in range(2):
+        tab[-1 - index] = random.randint(1, 12)
+
+    return tab
 
 
