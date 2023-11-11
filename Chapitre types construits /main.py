@@ -132,22 +132,16 @@ def fibonnaci(nombre):
     """
     :param int nombre: nombre jusqu'auquel on génère la suite
     :return: La suite des n premiers termes de la suite de fibonnaci
-    :rtype: list[int]
+    :rtype: list
     """
-    assert nombre >= 0, "Le nombre doit etre positif"
-
-    if nombre == 0:
-        return []
-    elif nombre == 1:
-        return [1]
+    assert nombre >= 0 and isinstance(nombre, int)
+    tab = [1] * nombre
+    if nombre in (0, 1):
+        return tab
     else:
-        liste = [1] * nombre
-        liste[0], liste[1] = 1, 1
-
-        for index in range(2, len(liste)):
-            liste[index] = liste[index - 1] + liste[index - 2]
-
-        return liste
+        for index in range(2, nombre):
+            tab[index] = tab[index - 1] + tab[index - 2]
+        return tab
 
 
 assert fibonnaci(0) == []
@@ -213,6 +207,7 @@ assert mini_bis([100, 7, 21, 14, 29]) == (1, 7)
 
 # Exo cours 1
 def ajoute_double(tab):
+    assert tab
     taille_initiale = len(tab)
     nouveau_tableau = [0 for _ in range(taille_initiale * 2)]
 
