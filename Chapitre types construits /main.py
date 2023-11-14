@@ -391,8 +391,6 @@ def nbr_record(liste):
             liste_nbr_record.append(nombre_courant)
 
 
-
-
 def estime_records(longueur_liste):
     """
     :param int longueur_liste: La longueur de la liste
