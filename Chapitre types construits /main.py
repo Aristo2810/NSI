@@ -333,3 +333,121 @@ def echange(tab, i, j):
 assert echange([1, 2, 3, 4], 0, 3) == [4, 2, 3, 1]
 assert echange([-1, 9, 2, 10, 9, 2], -3, 2) == [-1, 9, 10, 2, 9, 2]
 assert echange([0, 1], 0, 1) == [1, 0]
+
+
+# Exercice 23
+def cherche(tab, x):
+    """
+    :param list tab: Le tableau à analyser
+    :param int | float | str x: L'élement à chercher
+    :return: l’indice de l’élément x s’il est présent dans le tableau tab et −1 s’il n’y est pas
+    :rtype: int
+    """
+    indice = 0
+    for element in tab:
+        if element == x:
+            return indice
+        indice += 1
+    return -1
+
+
+assert cherche([1, 2, 3], 1) == 0
+assert cherche(['a', 'b', 'c', 'd'], 'b') == 1
+assert cherche([1.5, 1.6, 1.7], 1.8) == -1
+assert cherche([9, 3, 1, -1, 0], 0) == 4
+
+
+def occurrences(tab, x):
+    """
+    :param list tab: Le tableau à parcourir
+    :param int | float | str x: L'élement dont nous devons compter l'occurrence
+    :return: le nombre d’occurrences de l’élément x dans le tableau tab
+    :rtype: int
+    """
+    occurrence_x = 0
+    for element in tab:
+        if element == x:
+            occurrence_x += 1
+    return occurrence_x
+
+
+assert occurrences([1, 1, 1, 1], 1) == 4
+assert occurrences(['abcde'], 'abde') == 0
+assert occurrences([1, 9, 1, 9], 9) == 2
+
+
+# Exercice 36
+def nbr_record(liste):
+    """
+    :param list[int] liste: La liste de nombre à parcourir
+    :return: Une liste comportant tous les nbr record de la liste donnée en argument
+    :rtype: list[int]
+    """
+    assert liste
+    liste_nbr_record = [liste[0]]  # Le premier nbr est toujours un nbr record
+
+    for nombre_courant in liste:
+        if nombre_courant > liste_nbr_record[-1]:
+            liste_nbr_record.append(nombre_courant)
+
+
+
+
+def estime_records(longueur_liste):
+    """
+    :param int longueur_liste: La longueur de la liste
+    :return: le nombre moyens de records dans une liste de taille longueur_liste
+    :rtype: float
+    """
+    total_nbr_record = 0
+
+    for i in range(100_000):
+        liste_aleatoire = [random.randint(1, 100) for _ in range(longueur_liste)]
+        total_nbr_record += len(nbr_record(liste_aleatoire))
+
+    return total_nbr_record / 100_000
+
+
+# Exercice 39
+def rectangle(largeur, hauteur):
+    """
+    :param int largeur: La longueur du rectangle à dessiner
+    :param int hauteur: La hauteur du rectangle à dessiner
+    :return: des symboles # disposés en rectangle de largeur l et de hauteur h
+    :rtype: str
+    """
+    for ligne in range(hauteur):
+        for colonne in range(largeur):
+            print('#', end='')
+        print()
+    return None
+
+
+# Exercice 29
+def produit(tab, n):
+    """
+    :param list[int] tab: Le tableau à parcourir
+    :param int n: Le coefficient multiplicateur
+    :return: un nouveau tableau obtenu en multipliant chaque élément de tab par n
+    :rtype: list[int]
+    """
+    assert isinstance(n, int)
+    return [element * n for element in tab]
+
+
+assert produit([1, 2, 3], 5) == [5, 10, 15]
+assert produit([], 4) == []
+assert produit([50, 20, -1], 0) == [0, 0, 0]
+
+
+def produit2(tab, n):
+    """
+    Modifie le tableau tab en argument
+    :param list[int} tab: Le tableau à parcourir
+    :param n: Le coefficient multiplicateur
+    :rtype: None
+    """
+    for index in range(len(tab)):
+        tab[index] *= n
+
+    return None
