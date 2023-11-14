@@ -449,3 +449,48 @@ def produit2(tab, n):
         tab[index] *= n
 
     return None
+
+
+def moyenne(tab):
+    """
+    :param list[int] tab: Le tableau contenant les valeurs dont nous devons faire la moyenne
+    :return: La moyenne des nombres de tab
+    :rtype: float
+    """
+    total_addition_nbr = 0
+
+    for nombre in tab:
+        total_addition_nbr += nombre
+
+    return total_addition_nbr / len(tab)
+
+
+def table_hasard(nbr, borne_sup):
+    """
+    :param int nbr: La longueur de la liste générée au hasard
+    :param borne_sup: La borne supérieure de l'intervalle [1 ; borne_sup] dans lequel sont tiréses les nbr
+    :return: une liste de n nombres tirés au hasard entre 1 et max
+    :rtype: list[int]
+    """
+    assert nbr >= 0
+    assert borne_sup >= 1
+    return moyenne([random.randint(1, borne_sup) for _ in range(nbr)])
+
+
+def compte_plus(tab, x):
+    """
+    :param list[int] tab: Le tableau de nbr à analyser
+    :param int x: un nombre
+    :return: Le nbr d'éléments de tab supérieurs ou égaux à x
+    """
+    nbr_element = 0
+
+    for element in tab:
+        if element >= x:
+            nbr_element += 1
+
+    return nbr_element
+
+
+assert compte_plus([1, 2, 3, 4, 5, 6], 2) == 5
+assert compte_plus([9, -1, 0, 3], 0) == 3
