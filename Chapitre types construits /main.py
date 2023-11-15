@@ -155,54 +155,9 @@ def euro_million():
     :return: La liste des numéros de l'euroMillion généré aléatoiremment
     :rtype: list[int]
     """
-    tab = [0] * 5
-
-    for index in range(3):
-        tab[index] = random.randint(1, 50)
-
-    for index in range(2):
-        tab[-1 - index] = random.randint(1, 12)
-
-    return tab
-
-
-# Exercice 25
-def mini(tab):
-    """
-    :param list[int] tab: La liste à analyser
-    :return: Le plus petit élement du tableau passé en paramètre
-    :rtype: int
-    """
-    assert tab
-    minimum = tab[0]
-    for element in tab:
-        if element < minimum:
-            minimum = element
-    return minimum
-
-
-assert mini([-8, 9, 7, 4, 5]) == -8
-assert mini([100, 7, 21, 14, 29]) == 7
-
-
-def mini_bis(tab):
-    """
-    :param list[int] tab: Le tableau à analyser
-    :return: le plus petit élement du tableau et son indice
-    :rtype: tuple[int, int]
-    """
-    assert tab
-    minimum = tab[0]
-    minimum_index = 0
-    for index, element in enumerate(tab):
-        if element < minimum:
-            minimum = element
-            minimum_index = index
-    return minimum_index, minimum
-
-
-assert mini_bis([-8, 9, 7, 4, 5]) == (0, -8)
-assert mini_bis([100, 7, 21, 14, 29]) == (1, 7)
+    numeros = [random.randint(1, 50) for _ in range(3)]
+    etoiles = [random.randint(1, 12) for _ in range(2)]
+    return numeros + etoiles
 
 
 # Exo cours 1
@@ -343,11 +298,9 @@ def cherche(tab, x):
     :return: l’indice de l’élément x s’il est présent dans le tableau tab et −1 s’il n’y est pas
     :rtype: int
     """
-    indice = 0
-    for element in tab:
-        if element == x:
-            return indice
-        indice += 1
+    for index in range(len(tab)):
+        if tab[index] == x:
+            return index
     return -1
 
 
@@ -372,7 +325,7 @@ def occurrences(tab, x):
 
 
 assert occurrences([1, 1, 1, 1], 1) == 4
-assert occurrences(['abcde'], 'abde') == 0
+assert occurrences(['abcdef'], 'abcde') == 0
 assert occurrences([1, 9, 1, 9], 9) == 2
 
 
@@ -447,7 +400,6 @@ def produit2(tab, n):
     """
     for index in range(len(tab)):
         tab[index] *= n
-
     return None
 
 
@@ -457,6 +409,7 @@ def moyenne(tab):
     :return: La moyenne des nombres de tab
     :rtype: float
     """
+    assert tab
     total_addition_nbr = 0
 
     for nombre in tab:
@@ -494,3 +447,43 @@ def compte_plus(tab, x):
 
 assert compte_plus([1, 2, 3, 4, 5, 6], 2) == 5
 assert compte_plus([9, -1, 0, 3], 0) == 3
+
+
+# Exercice 25
+def mini_tab(tab):
+    """
+    :param list[int] tab: Le tableau à parcourir
+    :return: L'élement minimum présent dans tab
+    :rtype: int
+    """
+    assert tab
+    minimum = tab[0]
+    for element in tab:
+        if element < minimum:
+            minimum = element
+    return minimum
+
+
+assert mini_tab([1, 2, 3, 4]) == 1
+assert mini_tab([-1, 0, 1, 62, -13, 903]) == -13
+assert mini_tab([-1, 902, -9]) == -9
+
+
+def mini_tab_bis(tab):
+    """
+    :param list[int] tab: Le tableau d'entier à parcourir
+    :return: L'indice et la valeur du minimum de tab
+    :rtype: tuple[int, int]
+    """
+    assert tab
+    index_min, element_min = 0, tab[0]
+    for index in range(len(tab)):
+        if tab[index] < element_min:
+            element_min = tab[index]
+            index_min = index
+    return index_min, element_min
+
+
+assert mini_tab_bis([1, 2, 3, 4]) == (0, 1)
+assert mini_tab_bis([-1, 0, 1, 62, -13, 903]) == (4, -13)
+assert mini_tab_bis([-1, 902, -9]) == (2, -9)
