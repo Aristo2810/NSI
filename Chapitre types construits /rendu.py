@@ -15,7 +15,7 @@ def fibonnaci(nombre):
     :rtype: list
     """
     assert nombre >= 0 and isinstance(nombre, int)
-    tab = [1] * nombre
+    tab = [1 for i in range(nombre)]
     if nombre in (0, 1):
         return tab
     else:
