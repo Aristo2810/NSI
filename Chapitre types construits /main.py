@@ -247,27 +247,6 @@ assert nbr_zero_consecutif([1, 2, 5]) == 0
 assert nbr_zero_consecutif([0, 0, 0, 0, 1, 0, 0, 1, 0, 0]) == 4
 
 
-# Exercice 27
-def prefixe(tab1, tab2):
-    """
-    :param list[int] tab1: Le premier tableau
-    :param list[int] tab2: Le deuxième tableau
-    :return: True si le tableau tab2 commence par les éléments du tableau tab1 dans l’ordre et False sinon
-    """
-    assert len(tab2) >= len(tab1)
-    assert tab1
-
-    for index in range(len(tab1)):
-        if not tab1[index] == tab2[index]:
-            return False
-    return True
-
-
-assert prefixe([1, 2, 3], [1, 2, 3, 4, 5, 6])
-assert not prefixe([2, 8, 9], [2, 8, 1, 9, 3])
-assert prefixe([-1], [-1, 9, 10])
-
-
 # Exercice 31
 def echange(tab, i, j):
     """
@@ -430,25 +409,6 @@ def table_hasard(nbr, borne_sup):
     return moyenne([random.randint(1, borne_sup) for _ in range(nbr)])
 
 
-def compte_plus(tab, x):
-    """
-    :param list[int] tab: Le tableau de nbr à analyser
-    :param int x: un nombre
-    :return: Le nbr d'éléments de tab supérieurs ou égaux à x
-    """
-    nbr_element = 0
-
-    for element in tab:
-        if element >= x:
-            nbr_element += 1
-
-    return nbr_element
-
-
-assert compte_plus([1, 2, 3, 4, 5, 6], 2) == 5
-assert compte_plus([9, -1, 0, 3], 0) == 3
-
-
 # Exercice 25
 def mini_tab(tab):
     """
@@ -487,3 +447,44 @@ def mini_tab_bis(tab):
 assert mini_tab_bis([1, 2, 3, 4]) == (0, 1)
 assert mini_tab_bis([-1, 0, 1, 62, -13, 903]) == (4, -13)
 assert mini_tab_bis([-1, 902, -9]) == (2, -9)
+
+
+# Exercice 24
+def compte_plus(tab, x):
+    """
+    :param list[int] tab: Le tableau à parcourir
+    :param int x: l'élement
+    :return: le nombre d’éléments du tableau supérieurs ou égaux à x
+    :rtype: int
+    """
+    nbr_element = 0
+    for element in tab:
+        if element >= x:
+            nbr_element += 1
+    return nbr_element
+
+
+assert compte_plus([1, 2, 3, 4], 1) == 4
+assert compte_plus([0, 1, -22, 99, 103, 83, 1], 1000) == 0
+assert compte_plus([9, 1, 4, 10, -13], 0) == 4
+assert compte_plus([], 9) == 0
+
+
+# Exercice 27
+def prefixe(tab1, tab2):
+    """
+    :param list[int] tab1: Le premier tab
+    :param list[int] tab2: Le deuxième tab
+    :return: True si le tableau tab2 commence par les éléments du tableau tab1 dans l’ordre et False sinon
+    :rtype: bool
+    """
+    assert len(tab2) > 0
+    for index in range(len(tab1)):
+        if not tab1[index] == tab2[index]:
+            return False
+    return True
+
+
+assert prefixe([1, 2, 3], [1, 2, 3, 4, 5, 6])
+assert not prefixe([2, 8, 9], [2, 8, 1, 9, 3])
+assert prefixe([-1], [-1, 9, 10])
