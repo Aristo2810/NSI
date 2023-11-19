@@ -488,3 +488,62 @@ def prefixe(tab1, tab2):
 assert prefixe([1, 2, 3], [1, 2, 3, 4, 5, 6])
 assert not prefixe([2, 8, 9], [2, 8, 1, 9, 3])
 assert prefixe([-1], [-1, 9, 10])
+
+
+# Exo cours
+"""
+L ← [10,'bonjour', 2] ; ajouter 5 à L puis afficher L va afficher [10, 'bonjour', 2, 5]
+
+Exemple : 
+type(L) vaut list
+type(L[0]) vaut int
+len(L) vaut 3
+
+L.append(5) ; L vaut [10, 'bonjour', 2, 5]
+L = [3, 1] + L ; L vaut [10, 'bonjour', 2, 5, 3, 1]
+L[0] = 'a' ; L vaut ['a', 'bonjour', 2, 5, 3, 1]
+len(L) vaut 6
+
+
+
+1) construire la liste des multiples de 13 inférieurs à 100
+liste = []
+for i in range(13, 101):
+    if i % 13 == 0:
+        liste.append(i)
+
+2) On part du nombre 4 et chaque nombre est égal au double du précédent auquel on soustrait 3. Construire
+la liste des 10 premiers termes ainsi définis. Même question si on veut la liste des termes inférieurs à 100
+def sequence(nbr_terme):
+    '''
+    :param int nbr_terme: le nbr de terme que l'on veut générer
+    :return: une liste contenant les termes
+    :rtype: list[int]
+    '''
+    liste = [4]
+    for i in range(nbr_terme - 1):
+        liste.append(liste[i] * 2 - 3)
+    return liste
+
+
+type(Lbis) vaut list
+type(Lbis[0]) vaut list
+type(Lbis[1]) vaut int
+
+Lbis[0][1] vaut 'bonjour'
+Lbis[1][0] vaut typeError
+len(Lbis) vaut 5
+Lbis.append([5]) ; Lbis vaut [[10, 'bonjour', 2], 2, 10, [], [1, 2, 3], [5]]
+
+Le slicing
+L=[2,5,2,1,12]
+
+M = L[1:3] vaut [5, 2]
+M=L[1:4:2] vaut [5, 1]
+M=L[1:] vaut [5, 2, 1, 12]
+M=L[:2] vaut [2, 5]
+M = L[:] vaut [2, 5, 2, 1, 12]
+M = L[::2] vaut [2, 2, 12]
+M=L[1:1] vaut []
+
+"""
