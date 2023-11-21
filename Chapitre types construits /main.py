@@ -109,14 +109,13 @@ def bintodec(nombre):
     total = 0
     for index in range(len(nombre)):
         chiffre = nombre[-1 - index]
-        total += int(chiffre) * 2**index
+        total += int(chiffre) * 2 ** index
     return total
 
 
 assert bintodec("010110") == 22
 assert bintodec("01001101") == 77
 assert bintodec("00000000") == 0
-
 
 # Exercice 15
 """
@@ -448,8 +447,16 @@ assert mini_tab_bis([1, 2, 3, 4]) == (0, 1)
 assert mini_tab_bis([-1, 0, 1, 62, -13, 903]) == (4, -13)
 assert mini_tab_bis([-1, 902, -9]) == (2, -9)
 
-
 # Exercice 24
+"""
+compte_plus([1, 2, 3, 4], 1) --> 4
+On initialise une variable nbr_element à 0 qui servira de compteur
+pour chaque element du tableau donné en argument, on cherche si l'élement est supérieur à x
+S'il l'est, on incrémente la variable nbr_element
+À la fin du script, on renvoie cette variable
+"""
+
+
 def compte_plus(tab, x):
     """
     :param list[int] tab: Le tableau à parcourir
@@ -471,6 +478,16 @@ assert compte_plus([], 9) == 0
 
 
 # Exercice 27
+"""
+prefixe([2, 8, 9), [2, 8, 1, 9, 3]) --> False
+prefixe([2, 8, 9), [2, 8, 9, 9, 3]) --> True
+On parcourt par indice le tableau 1 donné en paramètre. 
+Pour chaque élement, si les élements du tableau ne sont pas égaux 2 à 2, on retourne False
+Si après avoir parcouru tous les élements du premier tableau donné en argument, nous n'avons pas renvoyé False 
+nous renvoyons True
+"""
+
+
 def prefixe(tab1, tab2):
     """
     :param list[int] tab1: Le premier tab
@@ -485,10 +502,8 @@ def prefixe(tab1, tab2):
     return True
 
 
-assert prefixe([1, 2, 3], [1, 2, 3, 4, 5, 6])
 assert not prefixe([2, 8, 9], [2, 8, 1, 9, 3])
 assert prefixe([-1], [-1, 9, 10])
-
 
 # Exo cours
 """
