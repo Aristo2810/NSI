@@ -562,3 +562,26 @@ M = L[::2] vaut [2, 2, 12]
 M=L[1:1] vaut []
 
 """
+
+
+# Exercice 33
+def separe(liste):
+    """
+    :param list[int] liste: La liste à scinder
+    :return: deux listes : la première contenant les nbr pairs de liste et la deuxième les nbr impairs
+    :rtype: tuple(list[int], list[int])
+    """
+    pair, impair = [], []
+    for element in liste:
+        if element % 2 == 0:
+            pair.append(element)
+        else:
+            impair.append(element)
+    return pair, impair
+
+
+assert separe(list(range(10))) == ([0, 2, 4, 6, 8], [1, 3, 5, 7, 9])
+assert separe([5, 9, 11]) == ([], [5, 9, 11])
+assert separe([2, 10, 20, 90, -6]) == ([2, 10, 20, 90, -6], [])
+assert separe([]) == ([], [])
+assert separe([2]) == ([2], [])
