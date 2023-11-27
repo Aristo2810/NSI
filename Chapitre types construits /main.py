@@ -476,7 +476,6 @@ assert compte_plus([0, 1, -22, 99, 103, 83, 1], 1000) == 0
 assert compte_plus([9, 1, 4, 10, -13], 0) == 4
 assert compte_plus([], 9) == 0
 
-
 # Exercice 27
 """
 prefixe([2, 8, 9), [2, 8, 1, 9, 3]) --> False
@@ -585,3 +584,39 @@ assert separe([5, 9, 11]) == ([], [5, 9, 11])
 assert separe([2, 10, 20, 90, -6]) == ([2, 10, 20, 90, -6], [])
 assert separe([]) == ([], [])
 assert separe([2]) == ([2], [])
+
+
+def assemble(tab_int, tab_str):
+    """
+    :param list[int] tab_int: Le tableau d'entier
+    :param list[str] tab_str: Le tableau de chaine de caras
+    :return: renvoie un tableau de tuple (int,string) correspondants
+    :rtype: list[tuple[int, str]]
+    """
+    long = len(tab_int)
+    assert long == len(tab_str)
+    nouveau_tab = [0 for _ in range(long)]
+    for index in range(long):
+        nouveau_tab[index] = tab_int[index], tab_str[index]
+    return nouveau_tab
+
+
+assert assemble([1, 2, 3], ['a', 'b', 'c']) == [(1, 'a'), (2, 'b'), (3, 'c')]
+assert assemble([], []) == []
+
+
+def separe(tab):
+    """
+    :param list[tuple[int, str]] tab: Le tableau à parcourir
+    :return: Deux tableaux composés l'un des int et l'autre des str
+    :rtype: tuple[list[int], list[str]]
+    """
+    assert len(tab) > 1
+    tab_int, tab_str = [], []
+    for element in tab:
+        tab_int.append(element[0])
+        tab_str.append(element[1])
+    return tab_int, tab_str
+
+
+assert separe([(1, 'a'), (2, 'b'), (3, 'c')]) == ([1, 2, 3], ['a', 'b', 'c'])
