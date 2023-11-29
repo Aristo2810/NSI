@@ -605,18 +605,16 @@ assert assemble([1, 2, 3], ['a', 'b', 'c']) == [(1, 'a'), (2, 'b'), (3, 'c')]
 assert assemble([], []) == []
 
 
-def separe(tab):
+def separe(tableau_tuples):
     """
-    :param list[tuple[int, str]] tab: Le tableau à parcourir
-    :return: Deux tableaux composés l'un des int et l'autre des str
-    :rtype: tuple[list[int], list[str]]
+    :param list[int] tab_int: Le tableau d'entier
+    :param list[str] tab_str: Le tableau de chaine de caras
+    :return: renvoie un tableau de tuple (int,string) correspondants
+    :rtype: list[tuple[int, str]]
     """
-    assert len(tab) > 1
-    tab_int, tab_str = [], []
-    for element in tab:
-        tab_int.append(element[0])
-        tab_str.append(element[1])
-    return tab_int, tab_str
+    entiers = [t[0] for t in tableau_tuples]
+    chaines = [t[1] for t in tableau_tuples]
+    return entiers, chaines
 
 
 assert separe([(1, 'a'), (2, 'b'), (3, 'c')]) == ([1, 2, 3], ['a', 'b', 'c'])
