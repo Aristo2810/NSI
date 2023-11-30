@@ -606,15 +606,29 @@ assert assemble([], []) == []
 
 
 def separe(tableau_tuples):
-    """
-    :param list[int] tab_int: Le tableau d'entier
-    :param list[str] tab_str: Le tableau de chaine de caras
-    :return: renvoie un tableau de tuple (int,string) correspondants
-    :rtype: list[tuple[int, str]]
-    """
     entiers = [t[0] for t in tableau_tuples]
     chaines = [t[1] for t in tableau_tuples]
     return entiers, chaines
 
 
 assert separe([(1, 'a'), (2, 'b'), (3, 'c')]) == ([1, 2, 3], ['a', 'b', 'c'])
+
+
+# Exercice 26
+def tous_diff(tab):
+    """
+    :param list[int] tab: Le tableau à parcourir
+    :return: True si tous les éléments de tab sont différents et False dans le cas contraire
+    :rtype: bool
+    """
+    for index in range(len(tab)):
+        if tab[index] in tab[index + 1:]:
+            return False
+    return True
+
+
+assert not tous_diff([1, 2, 3, 4, 1])
+assert tous_diff([9, -3, 10])
+assert tous_diff([91, 9, 1, -91])
+assert not tous_diff([0, 81, 0, 91, 3])
+assert tous_diff([])
