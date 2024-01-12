@@ -93,3 +93,33 @@ def multiplier_fraction(fraction1: tuple[int, int], fraction2: tuple[int, int]) 
 assert multiplier_fraction((10, 31), (2, 3)) == (20, 93)
 assert multiplier_fraction((9, 1), (28, 92)) == (63, 23)
 assert multiplier_fraction((0, 19), (11, 27)) == (0, 1)
+
+
+def inverse(frac: tuple[int, int]) -> tuple[int, int]:
+    """
+    Prend en argument une fraction et renvoie son inverse (si num et denom sont diff de 0)
+    """
+    if frac[0] != 0 and frac[1] != 0:
+        return frac[1], frac[0]
+    return "undef"
+
+
+assert inverse((1, 2)) == (2, 1)
+assert inverse((10, 30)) == (30, 10)
+assert inverse((1, 1)) == (1, 1)
+
+
+def divise(frac1: tuple[int, int], frac2: tuple[int, int]) -> tuple[int, int]:
+    """
+    Prend en argument deux fractions retourne leur division entre elles
+    """
+    if frac1 == frac2:
+        return (1, 1)
+    fraction_2_inverse = inverse(frac2)
+    return multiplier_fraction(frac1, fraction_2_inverse)
+
+
+assert divise((1, 2), (1, 2)) == (1, 1)
+assert divise((3, 2), (7, 6)) == (9, 7)
+assert divise((10, 30), (30, 10)) == (1, 9)
+    
